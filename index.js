@@ -1,3 +1,4 @@
+const express = require('express');
 const admin = require('firebase-admin');
 const TelegramBot = require('node-telegram-bot-api');
 
@@ -49,3 +50,18 @@ db.collection('users_logins')
     }, err => {
         console.error("Ошибка при подписке на изменения в Firestore:", err);
     });
+
+
+// --- Добавляем минимальный Express HTTP-сервер для Heroku --- //
+
+const app = express();
+const PORT = process.env.PORT || 3000;
+
+// Этот endpoint можно оставить, чтобы Heroku увидел, что процесс слушает HTTP запросы.
+app.get('/', (req, res) => {
+    res.send('Бот запущен и слушает Firebase уведомления');
+});
+
+app.listen(PORT, () => {
+    console.log(`Express-сервер запущен, порт ${PORT}`);
+});
