@@ -1,6 +1,5 @@
 const admin = require('firebase-admin');
 const TelegramBot = require('node-telegram-bot-api');
-require('dotenv').config(); // Для локальной разработки
 
 // Инициализация firebase-admin с использованием сервисного аккаунта из переменной окружения
 const serviceAccount = JSON.parse(process.env.FIREBASE_SECRET);
